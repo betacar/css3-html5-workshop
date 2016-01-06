@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!--
+  Google HTML5 slide template
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+  URL: http://code.google.com/p/html5slides/
+-->
+<html>
+  <head>
+    <title>HTML5 & CSS: Técnicas y herramientas de maquetación HTML y de estilos visuales CSS | CVG Bauxilum</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body style="display: none">
+    <section class="slides layout-widescreen">
+      <article>
+        <h1>HTML5 <span class="amp"></span> CSS3</h1>
+        <p>Técnicas y herramientas de maquetación HTML y de estilos visuales CSS</p>
+        <small class="bloque">Carlos Betancourt C.</small>
+        <small class="bloque">Julio, 2011</small>
+      </article>
+      
+      <article>
+        <h3>¿De qué no hablaremos en este taller?</h3>
+        <ul>
+          <li>Conceptos de HTML</li>
+          <li>Optimización para buscadores (SEO)</li>
+          <li>Arquitectura cliente - servidor</li>
+          <li>Otros temas considerados básicos o no acordes al entorno corporativo</li>
+        </ul>
+        <h3>¿Y cuál es el objetivo entonces?</h3>
+        <ul>
+          <li>Mejorar las prácticas y técnicas de codificación HTML y maquetación CSS; siguiendo estándares (<em>W3C</em>), con recursos y herramientas gratuitas.</li>
+        </ul>
+        </div>
+      </article>
+      
+      <article class="smaller">
+      	<h3>El DOM</h3>
+        <img src="src/f0401.gif" alt="" class="centered" />
+        <p><em>DOM o Document Object Model es un conjunto de utilidades específicamente diseñadas para manipular documentos XML, XHTML y HTML. Técnicamente, DOM es una API de funciones que se pueden utilizar para manipular las páginas XHTML de forma rápida y eficiente.</em></p>
+        <p><em>El árbol generado no sólo representa los contenidos del archivo original (mediante los nodos del árbol) sino que también representa sus relaciones y herencia de estilos, mediante las ramas del árbol que conectan los nodos.</em></p>
+        <small class="source">Fuente: <a href="http://goo.gl/PnS8C">http://goo.gl/PnS8C</a></small>
+      </article> 
+           
+      <article class="smaller">
+        <h3>Mejorando la codificación HTML según la W3C</h3>
+        <ul>
+          <li>Escribir tags en minúsculas:
+            <pre>
+  &lt;body&gt;
+    &lt;div id="header"&gt;
+      &lt;h1&gt;Cabecera H1&lt;/h1&gt;
+      &lt;h2&gt;Cabecera H2, con texto descriptivo&lt;/h2&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+            </pre>
+          </li>
+          <li>Cerrar siempre los tags:
+            <pre>
+  &lt;p&gt;Párrafo antes de lista no ordenada 
+    &lt;ul&gt;
+      &lt;li&gt;Item de lista 1
+        &lt;li&gt;Item de lista 2
+            </pre>
+            <pre>
+  &lt;p&gt;Párrafo antes de lista no ordenada&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Item de lista 1&lt;/li&gt;
+    &lt;li&gt;Item de lista 2&lt;/li&gt;
+  &lt;/ul&gt;
+            </pre>
+          </li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/022B">http://goo.gl/022B</a></small>
+      </article>
+      
+      <article class="smaller">
+        <h3>Mejorando la codificación HTML según la W3C</h3>
+        <ul>
+          <li>Declarar el DocType correcto:
+            <ol>
+              <li><pre>&lt;!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.01//EN” “http://www.w3.org/TR/html4/strict.dtd”&gt;</pre></li>
+              <li><pre>&lt;!DOCTYPE HTML PUBLIC “-//W3C//DTD HTML 4.01 Transitional//EN” “http://www.w3.org/TR/html4/loose.dtd”&gt;</pre></li>
+              <li><pre>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”&gt;</pre></li>
+              <li><pre>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Strict//EN” “http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd”&gt;</pre></li>
+              <li><pre>&lt;!DOCTYPE html”&gt;</pre></li>
+            </ol>
+          </li>
+          <li>Declarar el vínculo CSS en el <span class="coded">&lt;head&gt;</span>:
+            <pre>
+  &lt;head&gt;
+    &lt;link rel="stylesheet" href="hoja_de_estilo.css"&gt;
+    &lt;link rel="stylesheet" href="hoja_de_estilo.css" media="all|screen|print|handheld"&gt;
+  &lt;/head&gt;
+            </pre>
+          </li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/022B">http://goo.gl/022B</a></small>
+      </article>
+
+      <article class="smaller">
+        <h3>Mejorando la codificación HTML, según la W3C</h3>
+        <ul>
+          <li>Declarar scripts antes del cierre del <span class="coded">&lt;body&gt;</span>:
+            <pre>
+      ...
+      &lt;/div&gt;
+      &lt;script type="text/javascript" src="js/lib/jquery.js"&gt;&lt;/script&gt;
+      &lt;script src="js/app.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+            </pre>
+          </li>
+          <li>No usar estilos en línea ni scripts intrusivos:
+            <pre>
+  &lt;input type="button" onclick="javascript:return evento_boton();" /&gt;
+  ...
+  &lt;p style="text-align:center;color:red"&gt;Este texto está centrado y en rojo&lt;/p&gt;
+            </pre>
+            <pre>
+  &lt;input type="button" id="boton_evento" /&gt;
+  ...
+  &lt;p class="centrado rojo"&gt;Este texto está centrado y en rojo&lt;/p&gt;
+  
+  /* Estilos */
+    .centrado { text-align:center }
+    .rojo { color:red }
+  
+  // jQuery/Javascript
+    var boton_evento = $('boton_evento');
+    boton.click(function() { ... });
+            </pre>
+          </li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/022B">http://goo.gl/022B</a></small>
+      </article>
+
+      <article class="smaller">
+        <h3>Mejorando la codificación HTML, según la W3C</h3>
+        <ul>
+          <li>Declarar los tags de forma jerárquica:
+            <pre>
+  &lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;
+      &lt;span&gt;Item 2&lt;/span&gt;
+      &lt;ul&gt;
+        &lt;li&gt;Item 2.1&lt;/li&gt;
+        &lt;li&gt;Item 2.2&lt;/li&gt;
+        &lt;li&gt;
+          &lt;span&gt;Item 2.3&lt;/span&gt;
+          &lt;ul&gt;
+            &lt;li&gt;Item 2.3.1&lt;/li&gt;
+            ...
+            </pre>
+          </li>
+          <li>Declarar títulos como cabeceras, según su prioridad:
+            <pre>
+  &lt;h1&gt;Titulo principal de la página&lt;/h1&gt;
+  &lt;h2&gt;Título secundario&lt;/h2&gt;
+  &lt;h3&gt;Título de tercer nivel&lt;/h3&gt;
+  &lt;h4&gt;Título de cuarto nivel&lt;/h4&gt;
+  &lt;h5&gt;Título de quinto nivel&lt;/h5&gt;
+  &lt;h6&gt;Título de sexto nivel&lt;/h6&gt;
+            </pre>
+          </li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/022B">http://goo.gl/022B</a></small>
+      </article>
+
+      <article>
+        <h3>Mejorando la codificación HTML, según la W3C</h3>
+        <ul>
+          <li>Los menúes, verticales y horizontales, son listas no ordenadas:
+            <pre>
+  &lt;ul id="nav"&gt;
+    &lt;li&gt;Home&lt;/li&gt;
+    &lt;li&gt;Nosotros&lt;/li&gt;
+    &lt;li&gt;Contacto&lt;/li&gt;
+  &lt;/ul&gt;
+            </pre>
+            <p>Para menúes horizontales, se declaran los estilos:</p> 
+            <pre>
+  #id { list-style:none }
+    #id li { display:inline }
+            </pre>
+          </li>
+          <li>Declarar el atributo ALT en imagenes (no importa si es vacío):
+            <pre>
+  &lt;img src="path/a/imagen.jpg" alt="Descripción de imagen" /&gt;
+            </pre>
+          </li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/022B">http://goo.gl/022B</a></small>
+      </article>
+
+      <article>
+        <h3>Semántica</h3>
+        <ul>
+          <li>"<em>Mantenlo simple y estúpido</em>": <strong>KISS</strong>.</li>
+          <li>"<em>Contenido sobre presentación</em>".</li>
+          <li>Cada tag tiene una definición estándar. Ls tablas (<span class="coded">&lt;table&gt;</span>) son para tabular datos, no para diagramación visual.</li>
+          <li>Los títulos no son párrafos con clases, son cabeceras... y tienen orden jerárquico (<span class="coded">&lt;h1&gt;</span> ... <span class="coded">&lt;h6&gt;</span>).</li>
+          <li>La diagramación visual se controla con CSS, no con HTML. Por ejemplo, no es válido utilizar <span class="coded">&lt;br /&gt;</span> para "empujar" un elemento hacia abajo.</li>
+          <li>Para destacar texto se utilizan las etiquetas <span class="coded">&lt;em&gt;</span> y <span class="coded">&lt;strong&gt;</span>. <span class="coded">&lt;b&gt;</span>, <span class="coded">&lt;i&gt;</span> y <span class="coded">&lt;u&gt;</span> se declaran en desuso.</li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/CeN7x">http://goo.gl/CeN7x</a></small>
+      </article>
+
+      <article class="smaller">
+        <h1>HTML5</h1>
+        <h2>Por una web multimedia y semántica</h2>
+      </article>
+
+      <article>
+        <h3>Nuevas especificaciones</h3>
+        <ul>
+          <li>Etiquetas semánticas:
+          	<img src="src/html5_semlayout.png" height="500" alt="HTML5 Semantic Layout" class="centered" />
+          </li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/sRTK">http://goo.gl/sRTK</a></small>
+      </article>
+      
+      <article>
+        <h3>Nuevas especificaciones</h3>
+        <ul>
+          <li>Tipos de dato para formularios:
+            <ul>
+              <li><span class="coded">search</span>: Campos de búsqueda</li>
+              <li><span class="coded">tel</span>: Números telefónicos</li>
+              <li><span class="coded">url</span>: URL's</li>
+              <li><span class="coded">email</span>: Correos electrónicos</li>
+              <li><span class="coded">datetime</span>: Fecha/hora</li>
+              <li><span class="coded">date</span>: Fecha</li>
+              <li><span class="coded">month</span>: Mes</li>
+            </ul>
+ 					</li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/sRTK">http://goo.gl/sRTK</a></small>
+      </article>
+      
+      <article>
+        <h3>Nuevas especificaciones</h3>
+        <ul>
+          <li>Tipos de dato para formularios:
+            <ul>
+              <li><span class="coded">week</span>: Semana</li>
+              <li><span class="coded">time</span>: Hora</li>
+              <li><span class="coded">datetime-local</span>: Fecha/hora según zona horaria</li>
+              <li><span class="coded">number</span>: Numérico</li>
+              <li><span class="coded">range</span>: Rango</li>
+              <li><span class="coded">color</span>: Color</li>
+            </ul>
+ 					</li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/sRTK">http://goo.gl/sRTK</a></small>
+      </article>
+      
+      <article>
+        <h3>Nuevas especificaciones</h3>
+        <ul>
+          <li>Atributos globales:
+            <ul>
+              <li><span class="coded">contenteditable</span>: Permite <span contenteditable="true">editar</span> el contenido de un elemento.</li>
+              <li><span class="coded">data-*</span>: Atributo con nombre valores customizados.</li>
+              <li><span class="coded">draggable</span>: Elemento arrastrable.</li>
+              <li><span class="coded">dropzone</span>: Define una zona de "aterrizaje" de elementos arrastrables.</li>
+              <li><span class="coded">spellcheck</span>: Verificar ortografía y escritura</li>
+            </ul>
+ 					</li>
+        </ul>
+        <small class="source">Fuente: <a href="http://goo.gl/sRTK">http://goo.gl/sRTK</a></small>
+      </article>
+
+      <article>
+        <h1>CSS: Hojas de estilo en cascada</h1>
+        <h2>El lado visual de HTML</h2>
+      </article>
+      
+      <article>
+        <h3>CSS "harcodeado":</h3>
+        <img src="src/css_embed.png" width="100%" class="centered" alt="" />
+        <p>Es considerado una mala práctica, debido a que el contenido no está separado de la presentación.</p>
+      </article>
+            
+      <article>
+        <h3>CSS externo:</h3>
+        <img src="src/css_external.png" width="70%" class="centered" alt="" />
+      </article>
+      
+      <article>
+        <h3>Selectores</h3>
+        <ul>
+          <li>Tags (1pt como selector): Afecta a todas las etiquetas del documento.
+            <ul>
+              <li><span class="coded">div { ... }</span>: Selecciona todos los <span class="coded">&lt;div&gt;</span> del documento.</li>
+            </ul>
+ 					</li>
+          <li>ID (100pts como selector): Se basa en el ID del elemento. Debe ser único por cada documento.
+            <ul>
+              <li><span class="coded">#lorem { ... }</span>: Selecciona el elemento con el atributo <span class="coded">id="lorem"</span>.</li>
+            </ul>
+ 					</li>
+          <li>Clase (10pts como selector): Se basa en la clase del elemento.
+            <ul>
+              <li><span class="coded">.azul { ... }</span>: Selecciona todos los  elementos con el atributo <span class="coded">class="azul"</span>.</li>
+            </ul>
+ 					</li>
+        </ul>
+      </article>
+      
+      <article>
+        <h3>Selectores</h3>
+        <ul>
+          <li>Pseudoselector (1pt como selector): Se basa en atributos y "estados" del elemento seleccionado.
+            <ul>
+              <li><span class="coded">input[type="button"] { ... }</span>: Selecciona todos los  elementos con el atributo <span class="coded">type="button"</span>.</li>
+              <li><span class="coded">li:first-child { ... }</span>: Selecciona el primer hijo de un conjunto de elementos.</li>
+              <li><span class="coded">a:link|active|hover|visited { ... }</span>: Selecciona los  elementos <span class="coded">&lt;a&gt;</span>, según su estado.</li>
+              <li><span class="coded">a[href$=".pdf"] { ... }</span>: Selecciona los  elementos <span class="coded">&lt;a&gt;</span>, donde el valor de <span class="coded">href</span> finalice en ".pdf"</li>
+            </ul>
+ 					</li>
+          <li>Selector múltiple: Agrupa un conjunto de selectores.
+            <ul>
+              <li><span class="coded">div#container input[type="text"] { ... }</span></li>
+              <li><span class="coded">ul#menu li.seleccionado:last-child { ... }</span></li>
+            </ul>
+ 					</li>
+        </ul>
+      </article>
+      
+      <article class="smaller">
+        <h3>Estilos: Propiedades visuales aplicadas a un elemento seleccionado.</h3>
+        <ul>
+          <li><span class="coded">{ background: #c0L0R3 url:("path/a/imagen.jpg") top|center|bottom left|center|right repeat-x|repeat-y|no-repeat; }</span>: Define el fondo de un elemento.</li>
+          <li><span class="coded">{ margin:10px; margin: 10px 10px; margin: 10px 10px 10px 10px; margin-[top|right|bottom|left]: 10px; }</span>: Define el margen externo de un elemento.</li>
+          <li><span class="coded">{ padding:10px; padding: 10px 10px; padding: 10px 10px 10px 10px; padding-[top|right|bottom|left]: 10px; }</span>: Define el margen interno de un elemento.</li>
+          <li>Fuentes:
+            <pre>
+selector { 
+  font: italic small-caps bold 13px/12px Helvetica,Arial,sans-serif; 
+  font-style: inherit|normal|italic|oblique; 
+  font-variant: inherit|normal|small-caps;
+  font-weight: 100...900|bold|bolder|inherit|lighter|normal; 
+  font-size: 00px|00.0em|00%; 
+  line-height: 00px|00.0em|00%; 
+  font-family: "Primera opcion",Segunda,default; 
+}
+            </pre>
+          </li>
+        </ul>
+      </article>
+      
+      <article class="smaller">
+        <ul>
+          <li>Los colores se pueden declarar como hexadecimales y en formato RGBA: 
+            <pre>
+selector { 
+  color: #000;
+  color: #000000;
+  *-color: rgba(255, 255, 54, 85);
+}
+            </pre>
+          </li>
+          <li><span class="coded">{ display: block|inherit|inline|inline-block|table-cell }</span></li>
+          <li><span class="coded">{ float: inherit|left|right|none }</span></li>
+          <li><span class="coded">{ clear: inherit|left|right|both|none }</span></li>
+          <li><span class="coded">{ text-shadow: 0px 0px 0px #c0L0R3; }</span></li>
+          <li>
+            <pre>
+selector {
+     -moz-box-shadow: 0px 0px 4px #ffffff; /* FF3.5+ */
+  -webkit-box-shadow: 0px 0px 4px #ffffff; /* Saf3.0+, Chrome */
+          box-shadow: 0px 0px 4px #ffffff; /* Opera 10.5, IE9, Chrome 10+ */
+}
+
+@font-face {
+  font-family: 'WebFont';
+  src: url('myfont.eot#') format('eot'),  /* IE6–8 */
+       url('myfont.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('myfont.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+            </pre>
+          </li>
+        </ul>
+      </article>
+      
+      <article class="smaller">
+        <ul>
+          <li>
+            <pre>
+@font-face {
+  font-family: 'WebFont';
+  src: url('myfont.eot#') format('eot'),  /* IE6–8 */
+       url('myfont.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('myfont.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
+            </pre>
+          </li>
+          <li>
+            <pre>
+/* Debajo de 960px */
+@media only screen and (max-width: 980px) and (min-width: 821px) {
+	selector { ... }
+}
+
+/* Debajo de 800px */
+@media only screen and (max-width: 820px) and (min-width: 621px) {
+	selector { ... }
+}
+
+/* Debajo de 600px */
+@media only screen and (max-width: 620px) and (min-width: 501px) {
+	selector { ... }
+}
+
+/* Debajo de 480px */
+@media only screen and (max-width: 500px) and (min-width: 341px) {
+	selector { ... }
+}
+
+/* Debajo de 320px */
+@media only screen and (max-width: 340px) and (min-width: 5px)  {
+	selector { ... }
+}
+            </pre>
+          </li>
+        </ul>
+      </article>
+      
+      <article class="smaller">
+        <ul>
+          <li>Capas:
+            <pre>
+elemento {
+  position: relative;
+}
+            
+elemento_selector {
+  position: absolute;
+  z-index: 0000;
+  top: 00px;
+  left: 00px;
+  right: 00px;
+}
+            </pre>
+          </li>
+          <li>Sprites:
+            <img src="src/nav_logo3.png" class="centered" alt="" />
+            <pre>
+elemento_padre {
+  background-image: url("path/a/imagen.png");
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+elemento_hijo{
+  background-position: 00px 00px;
+}
+            </pre>
+          </li>
+        </ul>
+      </article>
+            
+      <article>
+        <h1>Navegadores</h1>
+        <h2>Motores de renderizado</h2>
+      </article>
+
+      <article>
+      	<img src="src/browsers-engines.png" width="100%" class="centered" alt="" />
+        <ul>
+          <li>Gecko: <span contenteditable="true">-moz-*</span></li>
+          <li>Webkit: <span contenteditable="true">-webkit-*</span></li>
+          <li>Presto: <span contenteditable="true">-o-*</span></li>
+        </ul>
+      </article>
+      
+      <article>
+        <img src="src/lunascape.jpg" alt="" width="100%" class="centered" />
+      </article>
+      
+      <article>
+        <img src="src/firefox-vs-ie.jpg" alt="" width="90%" class="centered" />
+      </article>
+      
+      <article class="smaller">
+        <h1>Front-end development</h1>
+        <h2>Recursos disponibles</h2>
+      </article>
+            
+      <article>
+        <q>Si tu única herramienta es un martillo, tiendes a tratar cada problema como si fuera un clavo</q>
+        <div class="author">Abraham Maslow</div>
+      </article>
+
+    </section>
+  <script src="src/slides.js"></script>
+  </body>
+</html>
